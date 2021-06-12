@@ -1,6 +1,7 @@
 import math
 import os
 import csv
+import json
 import tkinter
 from tkinter import*
 import tkinter.messagebox as tkmb
@@ -30,7 +31,7 @@ def path_get(name):#path是代码所在的路径，name是带后缀的文件名�
 
 def initial():
     if tail[0]=='.csv':ret=csv_initial()
-    elif tail[0]=='.json':ret=json_initial()
+    #elif tail[0]=='.json':ret=json_initial()
     elif tail[0]=='.xls':ret=excel_initial()
     return ret
 
@@ -38,9 +39,10 @@ def csv_initial():#将文件导入成为Dataframe格式，并返回
     file=pd.read_csv(path[0],encoding='gbk',engine='c')
     return file
 
-def json_initial():
-    file=pd.read_json(path[0])
-    return file
+#def json_initial():
+    #file=json.load(open(path[0]))
+    #ret=pd.DataFrame(file['result'])
+    #return ret
 
 def excel_initial():
     file=pd.read_excel(path[0])
@@ -75,7 +77,7 @@ def getname():#第一个界面用来获得文件名和后缀
     lspace=Label(win1,text='选择后缀')
     namein=Entry(win1,width=10)
     bcsv=Button(win1,text='.csv格式',command=lambda:confirm('.csv'))
-    bjson=Button(win1,text='.json格式',command=lambda:confirm('.json'))
+    #bjson=Button(win1,text='.json格式',command=lambda:confirm('.json'))
     bxls=Button(win1,text='.xls格式',command=lambda:confirm('.xls'))
     bconfirrm=Button(win1,text='确定',command=lambda:check(namein))
     lname.grid(row=1,column=1)
@@ -83,7 +85,7 @@ def getname():#第一个界面用来获得文件名和后缀
     lspace.grid(row=2,column=2)
     bcsv.grid(row=3,column=1)
     bxls.grid(row=3,column=2)
-    bjson.grid(row=3,column=3)
+    #bjson.grid(row=3,column=3)
     bconfirrm.grid(row=4,column=2)
     win1.mainloop()
 
