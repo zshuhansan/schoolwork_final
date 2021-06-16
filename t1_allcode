@@ -22,11 +22,13 @@ plt.rcParams['axes.unicode_minus']=False #用来正常显示负号
 tail=['']
 path=['']#迫于不会操作，设了两个全局变量
 def path_get(name):#path是代码所在的路径，name是带后缀的文件名字,返回值是文件的可用路径，限win10
-    #限win10的原因是，
+    #限win10/VS的原因是VS返回的路径不太对
+    
     path=os.path.dirname(os.path.realpath(__file__))
-    ret=path.split('\\')
-    ret.append(name)
-    ret='/'.join(ret)
+    if '\\' in path:
+        ret=path.split('\\')
+        ret.append(name)
+        ret='/'.join(ret)
     return ret
 
 def initial():
